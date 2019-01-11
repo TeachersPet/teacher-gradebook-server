@@ -4,7 +4,7 @@ exports.seed = function(knex, Promise) {
   return knex('subjects').del()
     .then(function () {
       // Inserts seed entries
-      return knex('subject').insert([
+      return knex('subjects').insert([
         {id: 1, subject_name: 'Reading'},
         {id: 2, subject_name: 'Writing'},
         {id: 3, subject_name: 'Math'},
@@ -15,7 +15,7 @@ exports.seed = function(knex, Promise) {
     .then(() => {
       // reset sequence
       return knex.raw(
-        `SELECT setval('invoices_id_seq', (SELECT MAX(id) FROM invoices));`
+        `SELECT setval('subjects_id_seq', (SELECT MAX(id) FROM subjects));`
         )
     })
 };
