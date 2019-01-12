@@ -10,6 +10,7 @@ app.use(morgan('dev'))
 if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
 //Routes
+app.use('/subjects', require('./routes/subjects'))
 
 
 //Default Route
