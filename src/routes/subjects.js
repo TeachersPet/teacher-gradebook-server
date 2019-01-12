@@ -6,4 +6,7 @@ router.get('/', subjectController.getSubjects)
 
 router.get('/:subjectId', subjectController.getOneSubject)
 
+router.use('/:subjectId/assignments', require('../routes/assignments'))
+
+
 module.exports = router;
