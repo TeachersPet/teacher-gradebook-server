@@ -1,18 +1,18 @@
-const models = require('../models/subjects')
+const subjectModel = require('../models/subjects')
 
-function getSubjects(res, next) {
-  models.getSubjects()
+function getSubjects(req, res, next) {
+  subjectModel.getSubjects()
     .then( (data) => {
-      res.send({ data })
+      res.send(data)
     })
     .catch(next)
 
 }
 
 function getOneSubject(req, res, next) {
-  models.getOneSubject(req.params.subjectId)
-    .then( (data) => {
-      res.send( { data })
+  subjectModel.getOneSubject(req.params.subjectId)
+    .then( ([ data ]) => {
+      res.send(data)
     })
     .catch(next)
 
