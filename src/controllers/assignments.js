@@ -11,7 +11,7 @@ function getAssignments(req, res, next) {
 
 function getOneAssignment(req, res, next) {
   assignmentModel.getOneAssignment(req.params.teacherId, req.params.subjectId, req.params.assignmentId)
-    .then((data) => {
+    .then(( data ) => {
       if (!data) return next({ status: 400, message: 'Assignment does not exist' })
       res.send(data)
     })
@@ -21,7 +21,7 @@ function getOneAssignment(req, res, next) {
 
 function createAssignment(req, res, next) {
   assignmentModel.create(req.params.teacherId, req.params.subjectId, req.params.assignment_name /*students, grades, comments*/)
-    .then((data) => {
+    .then(([ data ]) => {
       if (!data) return next({ status: 400, message: 'Assignment not created' })
       res.status(201).send(data)
     })
@@ -30,7 +30,7 @@ function createAssignment(req, res, next) {
 
 function updateAssignment(req, res, next) {
   assignmentModel.updateAssignment(req.params.teacherId, req.params.subjectId, req.params.assignmentId, req.body.assignment_name, req.body.student_id, req.body.grade, req.body.comment)
-    .then((data) => {
+    .then(([ data ]) => {
       if (!data) return next({ status: 400, message: 'Assignment not updated' })
       res.status(201).send(data)
     })
@@ -40,7 +40,7 @@ function updateAssignment(req, res, next) {
 
 function removeAssignment(req, res, next) {
   assignmentModel.removeAssignment(req.params.teacherId, req.params.subjectId, req.params.assignmentId)
-    .then((data) => {
+    .then(([ data ]) => {
       if (!data) return next({ status: 400, message: 'Assignment not deleted' })
       res.send(data)
     })

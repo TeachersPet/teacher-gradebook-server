@@ -8,5 +8,7 @@ router.get('/:subjectId', subjectController.getOneSubject)
 
 router.use('/:subjectId/assignments', require('../routes/assignments'))
 
+router.use('/:subjectId/students', require('../routes/students') )
+
 
 module.exports = router;

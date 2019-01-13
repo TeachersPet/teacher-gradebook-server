@@ -7,7 +7,6 @@ function getSubjects(req, res, next) {
       res.send(data)
     })
     .catch(next)
-
 }
 
 function getOneSubject(req, res, next) {
@@ -17,7 +16,6 @@ function getOneSubject(req, res, next) {
       res.send(data)
     })
     .catch(next)
-
 }
 
 module.exports = {

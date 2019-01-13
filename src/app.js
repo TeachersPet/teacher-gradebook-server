@@ -35,5 +35,5 @@ app.use(function(err, req, res, next){
 const port = process.env.PORT || 3000
 
 app.listen(port, function(){
-  console.log(`Invoice Creator listening on port ${port}`)
+  console.log(`Teacher Gradebook listening on port ${port}`)
 })

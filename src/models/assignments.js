@@ -3,15 +3,17 @@ const knex = require('../../db/index')
 function getAssignments(teacher_id, subject_id) {
   return knex('assignments')
     .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
-    .select('assignment_name', 'student_id', 'grade', 'comment')
-    .where({ teacher_id, subject_id })
+    .join('students', 'students.id', 'students_assignments.student_id')
+    .select('assignment_name', 'student_id', 'first_name', 'last_name','grade', 'comment')
+    .where({ 'assignments.teacher_id': teacher_id, subject_id })
 }
 
 function getOneAssignment(teacher_id, subject_id, assignmentId) {
   return knex('assignments')
     .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
-    .select('assignment_name', 'student_id', 'grade', 'comment')
-    .where({ teacher_id, subject_id, 'assignments.id': assignmentId })
+    .join('students', 'students.id', 'students_assignments.student_id')
+    .select('assignment_name', 'student_id', 'first_name', 'last_name','grade', 'comment')
+    .where({ 'assignments.teacher_id': teacher_id, subject_id, 'assignments.id': assignmentId })
 }
 
 function createAssignment(teacher_id, subject_id, assignment_name /*students, grades, comments*/) {

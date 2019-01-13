@@ -12,4 +12,6 @@ router.put('/:assignmentId', assignmentController.updateAssignment)
 
 router.delete('/:assignmentId', assignmentController.removeAssignment)
 
+router.use('/:assignmentId/students', require('../routes/students'))
+
 module.exports = router;
