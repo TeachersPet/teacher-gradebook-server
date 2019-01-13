@@ -1,17 +1,20 @@
 const knex = require('../../db/index')
 
-function getAssignments(teacherId, subjectId) {
+function getAssignments(teacher_id, subject_id) {
   return knex('assignments')
-    .where({ 'teacher_id': teacherId, 'subject_id': subjectId })
-    .where('subject_id', subjectId)
+    .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
+    .select('assignment_name', 'student_id', 'grade', 'comment')
+    .where({ teacher_id, subject_id })
 }
 
-function getOneAssignment(teacherId, subjectId, assignmentId) {
+function getOneAssignment(teacher_id, subject_id, assignmentId) {
   return knex('assignments')
-    .where({ 'teacher_id': teacherId, 'subject_id': subjectId, 'id': assignmentId })
+    .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
+    .select('assignment_name', 'student_id', 'grade', 'comment')
+    .where({ teacher_id, subject_id, 'assignments.id': assignmentId })
 }
 
-function createAssignment(teacher_id, subject_id, assignment_name) {
+function createAssignment(teacher_id, subject_id, assignment_name /*students, grades, comments*/) {
   return knex('assignments')
   .insert({teacher_id, subject_id, assignment_name})
   .returning('*')
@@ -25,12 +28,27 @@ function createAssignment(teacher_id, subject_id, assignment_name) {
   })
 }
 
-function updateAssignment(req, res, next) {
-
+function updateAssignment(teacher_id, subject_id, assignment_id, assignment_name, student_id = null, grade = null, comment = null) {
+  return knex('assignments')
+  .update({ assignment_name })
+  .where({teacher_id, subject_id, 'assignments.id': assignment_id})
+  .returning('*')
+  .then( (response) => {
+    if (student_id && (grade || comment) ) {
+      return knex('students_assignments')
+      .update({ grade, comment })
+      .where({student_id, assignment_id})
+      .returning('*')
+    }
+    return response
+  })
 }
 
-function removeAssignment(req, res, next) {
-  
+function removeAssignment(assignmentId) {
+  return knex('assignments')
+  .del()
+  .where({'assignments.id': assignmentId})
+  .returning('*')
 }
 
 module.exports = {
