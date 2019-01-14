@@ -8,7 +8,7 @@ function getOne(teacherId){
   )
 }
 
-function getUserByEmail(email){
+function getTeacherByEmail(email){
   return (
     knex('teachers')
     .where({ 'email': email })
@@ -38,5 +38,6 @@ function create(first_name, last_name, grade_level, email, password){
 
 module.exports = {
   getOne,
+  getTeacherByEmail,
   create
 }

@@ -8,10 +8,8 @@ router.get('/:assignmentId', assignmentController.getOneAssignment)
 
 router.post('/', assignmentController.createAssignment)
 
-router.put('/:assignmentId', assignmentController.updateAssignment)
-
 router.delete('/:assignmentId', assignmentController.removeAssignment)
 
-router.use('/:assignmentId/students', require('../routes/students'))
+router.use('/:assignmentId/students', require('../routes/students_assignments'))
 
 module.exports = router;
