@@ -17,7 +17,7 @@ function getTeacherByEmail(email){
 }
 
 function create(first_name, last_name, grade_level, email, password){
-  return getUserByEmail(email)
+  return getTeacherByEmail(email)
   .then( (data) => {
     if(data) throw { status: 400, message:'User already exists'}
 

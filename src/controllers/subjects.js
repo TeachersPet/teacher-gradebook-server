@@ -2,8 +2,8 @@ const subjectModel = require('../models/subjects')
 
 function getSubjects(req, res, next) {
   subjectModel.getSubjects()
-    .then( (data) => {
-      if(!data) return next({status: 400, message: 'Data does not exist'})
+    .then((data) => {
+      if(data.length === 0) return next({status: 400, message: 'Data does not exist'})
       res.send(data)
     })
     .catch(next)
