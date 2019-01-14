@@ -17,9 +17,9 @@ function getOneAssignment(teacher_id, subject_id, assignmentId) {
     .where({ 'assignments.teacher_id': teacher_id, subject_id, 'assignments.id': assignmentId })
 }
 
-function createAssignment(teacher_id, subject_id, assignment_name, studentsArray) {
+function createAssignment(teacher_id, subject_id, assignment_name, date, studentsArray) {
   return knex('assignments')
-    .insert({ teacher_id, subject_id, assignment_name })
+    .insert({ teacher_id, subject_id, date, assignment_name })
     .returning('*')
     .then(([response]) => {
       //Adding mulitple students, each with their id, grades, and comments
