@@ -3,6 +3,6 @@ const router = express.Router({mergeParams: true});
 const studentController = require('../controllers/students')
 const authController = require('../controllers/auth')
 
-router.get('/', authController.authenticated, authController.isSelf, studentController.getStudents)
+router.get('/', studentController.getStudents)
 
 module.exports = router;
