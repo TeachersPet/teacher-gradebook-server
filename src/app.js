@@ -12,7 +12,6 @@ if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 //Routes
 app.use('/teachers', require('./routes/teachers'))
 
-
 //Default Route
 app.use(function(req, res, next){
   next({status: 404, message: 'Route not found' })

@@ -4,6 +4,4 @@ const studentController = require('../controllers/students')
 
 router.get('/', studentController.getStudents)
 
-router.get('/:studentId/assignments', studentController.getOneStudentAssignments)
-
 module.exports = router;

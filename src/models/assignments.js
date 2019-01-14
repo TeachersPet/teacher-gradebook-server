@@ -1,62 +1,46 @@
 const knex = require('../../db/index')
 
-function getAssignments(teacher_id, subject_id) {
-  return knex('assignments')
-    .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
-    .join('students', 'students.id', 'students_assignments.student_id')
-    .select('assignment_name', 'student_id', 'first_name', 'last_name','grade', 'comment')
-    .where({ 'assignments.teacher_id': teacher_id, subject_id })
+const studentsAssignmentsJoin = knex('assignments')
+  .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
+  .join('students', 'students.id', 'students_assignments.student_id')
+
+function getAssignments(teacher_id, subject_id, student_id) {
+  if (student_id) {
+    return studentsAssignmentsJoin.where({ 'assignments.teacher_id': teacher_id, subject_id, student_id })
+  } else {
+    return studentsAssignmentsJoin.where({ 'assignments.teacher_id': teacher_id, subject_id })
+  }
 }
 
 function getOneAssignment(teacher_id, subject_id, assignmentId) {
-  return knex('assignments')
-    .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
-    .join('students', 'students.id', 'students_assignments.student_id')
-    .select('assignment_name', 'student_id', 'first_name', 'last_name','grade', 'comment')
+  return studentsAssignmentsJoin
     .where({ 'assignments.teacher_id': teacher_id, subject_id, 'assignments.id': assignmentId })
 }
 
 function createAssignment(teacher_id, subject_id, assignment_name, studentsArray) {
   return knex('assignments')
-  .insert({teacher_id, subject_id, assignment_name})
-  .returning('*')
-  .then(([response]) => {
-    //How to get multiple student ids, grades, and comments?
-    return knex('students_assignments').insert([
-      studentsArray.map( student => { 
-        return {'students_id': student.id, assignment_id: response.id, grade: student.grade, comment: student.comment }
+    .insert({ teacher_id, subject_id, assignment_name })
+    .returning('*')
+    .then(([response]) => {
+      //Adding mulitple students, each with their id, grades, and comments
+      const studentInserts = studentsArray.map(student => {
+        return { 'student_id': student.id, assignment_id: response.id, grade: (student.grade || 0), comment: (student.comment || null) }
       })
-    ])
-  })
-}
-
-function updateAssignment(teacher_id, subject_id, assignment_id, assignment_name, student_id = null, grade = null, comment = null) {
-  return knex('assignments')
-  .update({ assignment_name })
-  .where({teacher_id, subject_id, 'assignments.id': assignment_id})
-  .returning('*')
-  .then( (response) => {
-    if (student_id && (grade || comment) ) {
-      return knex('students_assignments')
-      .update({ grade, comment })
-      .where({student_id, assignment_id})
-      .returning('*')
-    }
-    return response
-  })
+      return knex('students_assignments').insert(studentInserts)
+        .returning('*')
+    })
 }
 
 function removeAssignment(assignmentId) {
   return knex('assignments')
-  .del()
-  .where({'assignments.id': assignmentId})
-  .returning('*')
+    .del()
+    .where({ 'assignments.id': assignmentId })
+    .returning('*')
 }
 
 module.exports = {
   getAssignments,
   getOneAssignment,
   createAssignment,
-  updateAssignment,
   removeAssignment
 }
