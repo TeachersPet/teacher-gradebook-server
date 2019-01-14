@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true });
 const assignmentController = require('../controllers/assignments')
+const authController = require('../controllers/auth')
 
-router.get('/', assignmentController.getAssignments)
+router.get('/', authController.authenticated, authController.isSelf, assignmentController.getAssignments)
 
-router.get('/:assignmentId', assignmentController.getOneAssignment)
+router.get('/:assignmentId', authController.authenticated, authController.isSelf, assignmentController.getOneAssignment)
 
-router.post('/', assignmentController.createAssignment)
+router.post('/', authController.authenticated, authController.isSelf, assignmentController.createAssignment)
 
-router.delete('/:assignmentId', assignmentController.removeAssignment)
+router.delete('/:assignmentId', authController.authenticated, authController.isSelf, assignmentController.removeAssignment)
 
 router.use('/:assignmentId/students', require('../routes/students_assignments'))
 

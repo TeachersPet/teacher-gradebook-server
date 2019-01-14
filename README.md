@@ -24,10 +24,16 @@
 * DELETE
   * `/teachers/:teacherId/subjects/:subjectId/assignments`
 
-### Assignments_Students
+### Students_Assignments
 * PUT
   * `/teachers/:teacherId/subjects/:subjectId/assignments/:assignmentId/students/:studentId`
 
 ### Students
 * GET ALL
   * `/teachers/:teacherId/subjects/:subjectId/students`
+
+### Authorization
+* GET
+  * `/login`
+* POST
+  * `/login`
