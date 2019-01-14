@@ -16,17 +16,17 @@ function getOneAssignment(teacher_id, subject_id, assignmentId) {
     .where({ 'assignments.teacher_id': teacher_id, subject_id, 'assignments.id': assignmentId })
 }
 
-function createAssignment(teacher_id, subject_id, assignment_name /*students, grades, comments*/) {
+function createAssignment(teacher_id, subject_id, assignment_name, studentsArray) {
   return knex('assignments')
   .insert({teacher_id, subject_id, assignment_name})
   .returning('*')
   .then(([response]) => {
-    return knex('students_assignments').insert([
-      {/*student_id: studentId*/ assignment_id: response.id /*grade: grade, comment: comment*/},
-      {/*student_id: studentId*/ assignment_id: response.id /*grade: grade, comment: comment*/},
-      {/*student_id: studentId*/ assignment_id: response.id /*grade: grade, comment: comment*/}
-    ])
     //How to get multiple student ids, grades, and comments?
+    return knex('students_assignments').insert([
+      studentsArray.map( student => { 
+        return {'students_id': student.id, assignment_id: response.id, grade: student.grade, comment: student.comment }
+      })
+    ])
   })
 }
 

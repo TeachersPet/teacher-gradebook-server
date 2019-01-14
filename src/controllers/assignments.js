@@ -20,7 +20,8 @@ function getOneAssignment(req, res, next) {
 }
 
 function createAssignment(req, res, next) {
-  assignmentModel.create(req.params.teacherId, req.params.subjectId, req.params.assignment_name /*students, grades, comments*/)
+  // req.body.students should be an array of objects, each object contanining a student id, grade, and comment
+  assignmentModel.create(req.params.teacherId, req.params.subjectId, req.params.assignment_name, req.body.students)
     .then(([ data ]) => {
       if (!data) return next({ status: 400, message: 'Assignment not created' })
       res.status(201).send(data)
