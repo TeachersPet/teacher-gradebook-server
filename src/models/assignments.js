@@ -8,7 +8,7 @@ function getAssignments(teacher_id, subject_id, student_id) {
   if (student_id) {
     return studentsAssignmentsJoin.where({ 'assignments.teacher_id': teacher_id, subject_id, student_id })
   } else {
-    return studentsAssignmentsJoin.where({ 'assignments.teacher_id': teacher_id, subject_id })
+    return knex('assignments').where({ teacher_id, subject_id })
   }
 }
 
