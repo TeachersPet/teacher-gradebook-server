@@ -1,19 +1,19 @@
 const knex = require('../../db/index')
 
-const studentsAssignmentsJoin = knex('assignments')
+const studentsAssignmentsJoin = () => knex('assignments')
   .join('students_assignments', 'assignments.id', 'students_assignments.assignment_id')
   .join('students', 'students.id', 'students_assignments.student_id')
 
 function getAssignments(teacher_id, subject_id, student_id) {
   if (student_id) {
-    return studentsAssignmentsJoin.where({ 'assignments.teacher_id': teacher_id, subject_id, student_id })
+    return studentsAssignmentsJoin().where({ 'assignments.teacher_id': teacher_id, subject_id, student_id })
   } else {
     return knex('assignments').where({ teacher_id, subject_id })
   }
 }
 
 function getOneAssignment(teacher_id, subject_id, assignmentId) {
-  return studentsAssignmentsJoin
+  return studentsAssignmentsJoin()
     .where({ 'assignments.teacher_id': teacher_id, subject_id, 'assignments.id': assignmentId })
 }
 

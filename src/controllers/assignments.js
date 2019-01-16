@@ -2,7 +2,7 @@ const assignmentModel = require('../models/assignments')
 
 function getAssignments(req, res, next) {
   assignmentModel.getAssignments(req.params.teacherId, req.params.subjectId, req.query.student)
-    .then((data) => {
+    .then((data) => { 
       // if (data.length === 0) return next({ status: 400, message: 'Data does not exist' })
       res.send(data)
     })
@@ -13,7 +13,7 @@ function getOneAssignment(req, res, next) {
   assignmentModel.getOneAssignment(req.params.teacherId, req.params.subjectId, req.params.assignmentId)
     .then((data) => {
       
-      if (data.length === 0) return next({ status: 400, message: 'Assignment does not exist' })
+      // if (data.length === 0) return next({ status: 400, message: 'Assignment does not exist' })
       res.send(data)
     })
     .catch(next)

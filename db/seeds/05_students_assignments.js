@@ -29,7 +29,20 @@ exports.seed = function (knex, Promise) {
         { id: 23, student_id: 10, assignment_id: 2, grade: 2, comment: 'Getting there' },
         { id: 24, student_id: 11, assignment_id: 2, grade: 4, comment: 'Nice work!' },
         { id: 25, student_id: 12, assignment_id: 2, grade: 1, comment: 'Uh oh' },
-        { id: 26, student_id: 13, assignment_id: 2, grade: 3 }
+        { id: 26, student_id: 13, assignment_id: 2, grade: 3 },
+        { id: 27, student_id: 1, assignment_id: 5, grade: 1, comment: 'Needs improvement' },
+        { id: 28, student_id: 2, assignment_id: 5, grade: 2 },
+        { id: 29, student_id: 3, assignment_id: 5, grade: 4, comment: 'Cheating?' },
+        { id: 30, student_id: 4, assignment_id: 5, grade: 3, comment: 'Shows improvement!' },
+        { id: 31, student_id: 5, assignment_id: 5, grade: 1, comment: 'Unfocused during assignment' },
+        { id: 32, student_id: 6, assignment_id: 5, grade: 1, comment: 'Good effort!' },
+        { id: 33, student_id: 7, assignment_id: 5, grade: 4, comment: 'Perfect!' },
+        { id: 34, student_id: 8, assignment_id: 5, grade: 4, comment: 'Also, perfect!' },
+        { id: 35, student_id: 9, assignment_id: 5, grade: 3, comment: 'Good start' },
+        { id: 36, student_id: 10, assignment_id: 5, grade: 2, comment: 'Getting there' },
+        { id: 37, student_id: 11, assignment_id: 5, grade: 4, comment: 'Nice work!' },
+        { id: 38, student_id: 12, assignment_id: 5, grade: 1, comment: 'Uh oh' },
+        { id: 39, student_id: 13, assignment_id: 5, grade: 3 }
       ]);
     })
     .then(() => {
