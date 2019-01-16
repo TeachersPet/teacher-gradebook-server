@@ -12,11 +12,11 @@ function getAssignments(req, res, next) {
 function getOneAssignment(req, res, next) {
   assignmentModel.getOneAssignment(req.params.teacherId, req.params.subjectId, req.params.assignmentId)
     .then((data) => {
+      
       if (data.length === 0) return next({ status: 400, message: 'Assignment does not exist' })
       res.send(data)
     })
     .catch(next)
-
 }
 
 function createAssignment(req, res, next) {

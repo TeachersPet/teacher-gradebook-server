@@ -8,4 +8,7 @@ router.post('/', teacherController.create)
 
 router.use('/:teacherId/subjects', require('../routes/subjects'))
 
+router.use('/:teacherId/students', require('../routes/students') )
+
+
 module.exports = router

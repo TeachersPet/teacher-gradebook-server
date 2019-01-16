@@ -30,7 +30,7 @@
 
 ### Students
 * GET ALL
-  * `/teachers/:teacherId/subjects/:subjectId/students`
+  * `/teachers/:teacherId/students`
 
 ### Authorization
 * GET
