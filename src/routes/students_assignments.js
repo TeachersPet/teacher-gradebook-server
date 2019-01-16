@@ -5,4 +5,5 @@ const authController = require('../controllers/auth')
 
 router.put('/:studentId', studentAssignmentController.updateAssignment)
 
+
 module.exports = router

@@ -20,6 +20,8 @@ app.use(function(req, res, next){
 
 // Error Handler
 app.use(function(err, req, res, next){
+  console.log(err);
+  
   const errorMessage = {}
 
   if(process.env.NODE_ENV !== 'production' && err.stack)
