@@ -5,4 +5,7 @@ const authController = require('../controllers/auth')
 
 router.get('/', studentController.getStudents)
 
+router.get('/:studentId', studentController.getOneStudent)
+
+
 module.exports = router;

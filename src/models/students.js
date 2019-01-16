@@ -5,6 +5,12 @@ function getStudents(teacher_id) {
   .where({teacher_id})
 }
 
+function getOneStudent(teacher_id, id) {
+  return knex('students')
+  .where({id, teacher_id})
+}
+
 module.exports = {
-  getStudents
+  getStudents,
+  getOneStudent
 }

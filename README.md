@@ -31,6 +31,8 @@
 ### Students
 * GET ALL
   * `/teachers/:teacherId/students`
+* GET ONE
+  * `/teachers/:teacherId/students/:studentId`
 
 ### Authorization
 * GET
