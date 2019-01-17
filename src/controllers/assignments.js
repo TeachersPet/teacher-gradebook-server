@@ -30,6 +30,7 @@ function createAssignment(req, res, next) {
 }
 
 function updateAssignment(req, res, next) {
+  // req.body.students should be an array of objects, each object contanining a student id, grade, and comment
   assignmentModel.updateAssignment(req.params.teacherId, req.params.subjectId, req.params.assignmentId, req.body.assignment_name, req.body.date, req.body.students)
     .then((data) => {
       // if (data.length === 0) return next({ status: 400, message: 'Assignment not updated' })
