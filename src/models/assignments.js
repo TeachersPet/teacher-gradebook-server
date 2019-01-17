@@ -24,11 +24,32 @@ function createAssignment(teacher_id, subject_id, assignment_name, date, student
     .then(([response]) => {
       //Adding mulitple students, each with their id, grades, and comments
       const studentInserts = studentsArray.map(student => {
-        return { 'student_id': student.id, assignment_id: response.id, grade: (student.grade || 0), comment: (student.comment || null) }
+        return { student_id: student.id, assignment_id: response.id, grade: (student.grade || 0), comment: (student.comment || null) }
       })
-      return knex('students_assignments').insert(studentInserts)
+      return knex('students_assignments')
+        .insert(studentInserts)
         .returning('*')
     })
+}
+
+function updateAssignment(teacher_id, subject_id, assignment_id, assignment_name, date, studentsArray) {
+  return knex('assignments')
+    .update({ assignment_name, date})
+    .where({teacher_id, subject_id, 'id': assignment_id})
+    .returning('*')
+    .then( () => {
+      const promises = studentsArray.map( student => {
+        return updateStudent(assignment_id, student.id, student.grade, student.comment)
+      })
+      return Promise.all(promises)
+    })
+}
+
+function updateStudent(assignment_id, student_id, grade, comment) {
+  return knex('students_assignments')
+    .update({ grade, comment })
+    .where({ student_id, assignment_id })
+    .returning('*')
 }
 
 function removeAssignment(assignmentId) {
@@ -42,5 +63,6 @@ module.exports = {
   getAssignments,
   getOneAssignment,
   createAssignment,
+  updateAssignment,
   removeAssignment
 }
