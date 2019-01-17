@@ -1,3 +1,25 @@
+# Teacher's Pet
+  * An easy to use and accessible web-based grading application for elementary school teachers.
+
+## To Install
+
+```
+npm install
+```
+### Create SQL DataBase
+```
+createdb gradebook_dev
+```
+### Seed Knex Database
+```
+npm run knex migrate:latest
+npm run knex seed:run
+```
+### Start Development Server
+```
+npm run dev
+```
+
 ## Routes
 
 ### Teachers
