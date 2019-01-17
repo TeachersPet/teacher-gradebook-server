@@ -4,9 +4,6 @@ const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
 
-const authController = require('./controllers/auth.js')
-
-
 app.use(cors())
 app.use(bodyParser.json())
 app.use(morgan('dev'))
@@ -14,7 +11,7 @@ if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
 //Routes
 app.use('/login', require('./routes/auth'))
-app.use('/teachers', authController.authenticated, authController.isSelf, require('./routes/teachers'))
+app.use('/teachers', require('./routes/teachers'))
 
 //Default Route
 app.use(function(req, res, next){
