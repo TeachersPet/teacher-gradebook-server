@@ -28,8 +28,9 @@ const authenticated = (req, res, next) => {
 const status = (req, res, next) => res.status(200).send({ id: req.claim.id })
 
 const isSelf = (req, res, next) => {
+  console.log(req.params.teacherId, req.claim.id)
   if (parseInt(req.params.teacherId) !== req.claim.id)
-    return next({ status: 401, message: 'Unauthorized' })
+    return next({ status: 401, message: 'Unauthorized is Self' })
   next()
 }
 
