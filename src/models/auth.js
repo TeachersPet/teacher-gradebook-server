@@ -18,9 +18,4 @@ const login = (email, password) => {
     })
 }
 
-// const isVendorOnInvoice = (invoiceId) => {
-//   return knex('accounts_invoices')
-//   .where({'accounts_invoices.invoice_id': invoiceId})
-// }
-
 module.exports = { login }
