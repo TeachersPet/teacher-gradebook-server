@@ -1,6 +1,19 @@
 # Teacher's Pet
   * An easy to use and accessible web-based grading application for elementary school teachers.
 
+### Deployed backend
+https://teacher-gradebook-server.herokuapp.com
+
+### Deployed frontend
+https://teachers-pet-gradebook.herokuapp.com/
+* Test login is email: test@me.com, password: test
+
+## Tech/framework used
+
+* Frontend : React / Redux / JavaScript / HTML / CSS / SASS
+* Backend : Node.js / Express / PostgreSQL / Knex.js
+
+
 ## To Install
 
 ```
@@ -61,3 +74,6 @@ npm run dev
   * `/login`
 * POST
   * `/login`
+
+## Data Structure
+![Data structure](/Database.png)
