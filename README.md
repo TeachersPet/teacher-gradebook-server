@@ -7,8 +7,8 @@ https://teacher-gradebook-server.herokuapp.com
 ### Deployed frontend
 https://teachers-pet-gradebook.herokuapp.com/
 * Test login: 
-* * email: test@me.com 
-* * password: test
+> email: test@me.com 
+> password: test
 
 ## Tech/framework used
 
@@ -33,6 +33,10 @@ npm run knex seed:run
 ### Start Development Server
 ```
 npm run dev
+```
+### Start Production Server
+```
+npm start
 ```
 
 ## Routes
