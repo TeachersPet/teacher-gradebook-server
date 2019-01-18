@@ -7,8 +7,8 @@ https://teacher-gradebook-server.herokuapp.com
 ### Deployed frontend
 https://teachers-pet-gradebook.herokuapp.com/
 * Test login: 
-> email: test@me.com 
-> password: test
+* > email: test@me.com 
+* > password: test
 
 ## Tech/framework used
 
